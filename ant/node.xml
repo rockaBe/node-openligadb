@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<project xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <import unless:set="nested.settings" file="settings.xml" as="nested.settings" />
+
+    <!-- Prerequirements -->
+    <target name="-node-check-for-node" description="Checks for the existance of the node binary.">
+        <exec executable="which" outputproperty="node.binary" failifexecutionfails="true">
+            <arg value="node" />
+        </exec>
+
+        <available file="${node.binary}" type="file" property="node.present" />
+        <echo if:set="node.present">Found node: ${node.binary}</echo>
+        <fail unless="node.present" message="Could not locate node binary. Please install node and make sure it is visible to 'which'." />
+    </target>
+
+    <target name="-node-check-for-npm" description="Checks for the existance of the npm binary which is used to setup the modules.">
+        <exec executable="which" outputproperty="npm.binary" failifexecutionfails="true">
+            <arg value="npm" />
+        </exec>
+
+        <available file="${npm.binary}" type="file" property="npm.present" />
+        <echo if:set="npm.present">Found node: ${npm.binary}</echo>
+        <fail unless="npm.present" message="Could not locate npm binary. Please install node and make sure it is visible to 'which'." />
+    </target>
+
+    <!-- Setup -->
+    <target name="node-clean-modules" description="Removes all node modules.">
+        <delete dir="${src.dir}/node_modules" quiet="true"/>
+    </target>
+
+    <target name="node-setup" description="Installs the project for production/staging." depends="-node-check-for-node, -node-check-for-npm, node-clean-modules">
+        <exec executable="npm" dir="${src.dir}">
+            <arg value="install" />
+            <arg value="--production" />
+        </exec>
+    </target>
+
+    <target name="node-setup-development" description="Installs the project for development." depends="-node-check-for-node, -node-check-for-npm, node-clean-modules">
+        <exec executable="npm" dir="${src.dir}">
+            <arg value="install" />
+        </exec>
+    </target>
+
+    <target name="node-update-development" description="Updates the project for development." depends="-node-check-for-node, -node-check-for-npm">
+        <exec executable="npm" dir="${src.dir}">
+            <arg value="update" />
+        </exec>
+    </target>
+
+</project>

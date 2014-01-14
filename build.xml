@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="node-openligadb" default="help" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <import unless:set="nested.settings" file="ant/settings.xml" as="nested.settings" />
+
+    <import file="ant/node.xml" as="nested.node" />
+    <import file="ant/tests.xml" as="nested.tests" />
+    <import file="ant/doc.xml" as="nested.doc" />
+
+    <target name="help">
+        <java classname="org.apache.tools.ant.Main">
+            <arg value="-projecthelp" />
+            <arg value="-buildfile" />
+            <arg value="${ant.file}" />
+        </java>
+    </target>
+
+    <target name="setup" description="Invokes all targets that needs to be done for setup in a productive environment.">
+        <antcall target="node-setup" />
+    </target>
+
+    <target name="setup-dev" description="Invokes all targets that needs to be done for setup in a development environment.">
+        <antcall target="node-setup-development" />
+    </target>
+
+    <target name="update-dev" description="Refreshs all development dependencies.">
+        <antcall target="node-update-development" />
+    </target>
+
+</project>

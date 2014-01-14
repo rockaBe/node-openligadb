@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<project xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <!-- General -->
+    <property name="src.dir" value="." />
+
+    <!-- Tests related -->
+    <property name="mocha.binary" value="node_modules/.bin/mocha" />
+    <property name="tests.dir" value="tests" />
+
+    <!-- Documentation related -->
+    <property name="yuidoc.config.file" value="yuidoc.json" />
+    <property name="doc.dir" value="doc" />
+
+</project>

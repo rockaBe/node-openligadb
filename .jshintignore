@@ -1,0 +1,7 @@
+.git
+
+
+node_modules
+tests/node_modules
+ant
+doc

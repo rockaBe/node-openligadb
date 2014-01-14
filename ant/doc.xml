@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <import unless:set="nested.settings" file="settings.xml" as="nested.settings" />
+
+    <!-- Prerequirements -->
+    <target name="-doc-check-for-yuidoc" description="Checks for the existance of the node binary.">
+        <exec executable="which" outputproperty="yuidoc.binary" failifexecutionfails="true">
+            <arg value="yuidoc" />
+        </exec>
+
+        <available file="${yuidoc.binary}" type="file" property="yuidoc.present" />
+        <echo if:set="yuidoc.present">Found yuidoc: ${yuidoc.binary}</echo>
+        <fail unless:set="yuidoc.present" message="Could not locate yuidoc binary. Please install yuidoc and make sure it is visible to 'which'." />
+    </target>
+
+    <target name="-doc-check-for-yuidoc-config-file" description="Checks if the yuidoc configuration file is present.">
+        <available file="${yuidoc.config.file}" type="file" property="yuidoc.config.file.present" />
+        <echo if:set="yuidoc.config.file.present">Found yuidoc config file at ${yuidoc.config.file}.</echo>
+        <fail unless:set="yuidoc.config.file.present" message="Could not locate yuidoc config file at ${yuidoc.config.file}." />
+    </target>
+
+    <target name="-doc-clean" description="Checks if the documentation dir exists and removes it if needed.">
+        <available file="${doc.dir}" type="dir" property="doc.dir.present" />
+        <delete if:set="doc.dir.present" dir="${doc.dir}" />
+    </target>
+
+    <target name="doc-generate" depends="-doc-check-for-yuidoc, -doc-check-for-yuidoc-config-file, -doc-clean" description="Generates the documents.">
+        <exec executable="${yuidoc.binary}" failifexecutionfails="true">
+            <arg value="-c" />
+            <arg value="${yuidoc.config.file}" />
+        </exec>
+    </target>
+
+</project>

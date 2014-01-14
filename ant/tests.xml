@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<project xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <import unless:set="nested.settings" file="settings.xml" as="nested.settings" />
+
+    <!-- Prerequirements -->
+    <target name="-tests-check-for-tests-directory" description="Checks if the directory containing the test files does exist.">
+        <available file="${tests.dir}" type="dir" property="tests.dir.present" />
+        <echo unless:set="tests.dir.present">No tests directory found at ${tests.dir}.</echo>
+        <fail unless="tests.dir.present" message="Nothing to test." />
+    </target>
+
+    <target name="-tests-check-for-node-modules" description="Checks if the node_modules directory is present in the tests directory.">
+        <available file="${tests.dir}/node_modules" type="dir" property="tests.node_modules.present" />
+        <echo unless:set="tests.node_modules.present">Creating symlink tests/node_modules</echo>
+        <symlink unless:set="tests.node_modules.present" resource="../node_modules" link="${tests.dir}/node_modules" />
+    </target>
+
+    <target name="-tests-check-for-mocha" description="Checks for the existance of the mocha testing framework." depends="-tests-check-for-node-modules">
+        <available file="${tests.dir}/${mocha.binary}" type="file" property="mocha.present" />
+        <echo if:set="mocha.present">Found mocha: ${mocha.binary}</echo>
+        <fail unless="mocha.present" message="Could not locate mocha. Please install all developer dependencies." />
+    </target>
+
+    <target name="-tests-check-for-jshint" description="Checks for the existance of jshint.">
+        <exec executable="which" outputproperty="jshint.binary" failifexecutionfails="true">
+            <arg value="jshint" />
+        </exec>
+
+        <available file="${jshint.binary}" type="file" property="jshint.present" />
+        <echo if:set="jshint.present">Found jshint: ${jshint.binary}</echo>
+        <fail unless="jshint.present" message="Could not locate jshint binary. Please install jshint and make sure it is visible to 'which'." />
+    </target>
+
+    <!-- Tests -->
+    <target name="test" depends="-tests-check-for-tests-directory, -tests-check-for-node-modules, -tests-check-for-mocha" description="Runs the tests.">
+        <exec executable="${mocha.binary}" failonerror="true" failifexecutionfails="true">
+            <arg value="--ui" />
+            <arg value="bdd" />
+            <arg value="--reporter" />
+            <arg value="tap" />
+            <arg value="--check-leaks" />
+            <arg value="--no-colors" />
+            <arg value="--globals" />
+            <arg value="request_headers,request_options" />
+            <arg value="${tests.dir}" />
+        </exec>
+    </target>
+
+    <target name="jshint" depends="-tests-check-for-jshint" description="Runs jshint to check on the code quality.">
+        <exec executable="${jshint.binary}" failonerror="true" failifexecutionfails="true">
+            <arg value="-c" />
+            <arg value=".jshintrc" />
+            <arg value="lib/" />
+        </exec>
+    </target>
+
+</project>

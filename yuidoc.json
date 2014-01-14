@@ -1,0 +1,13 @@
+{
+    "name": "node-openligadb",
+    "description": "A node connector to the community driven scoring API openligadb.",
+    "version": "0.0.1",
+    "url": "http://danielkbx.com",
+    "options": {
+        "outdir": "doc",
+        "paths": [
+            "lib"
+        ]
+    }
+
+}
