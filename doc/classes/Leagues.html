@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ManagerPrototype - node-openligadb</title>
+    <title>Leagues - node-openligadb</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -102,15 +102,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ManagerPrototype Class</h1>
+                        <h1>Leagues Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends <a href="../classes/ManagerPrototype.html" class="crosslink">ManagerPrototype</a>
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_Manager_Prototype.js.html#l17"><code>lib&#x2F;Manager&#x2F;Prototype.js:17</code></a>
+            Defined in: <a href="../files/lib_Manager_Leagues.js.html#l17"><code>lib&#x2F;Manager&#x2F;Leagues.js:17</code></a>
         </div>
     
 
@@ -127,15 +131,15 @@
 
 
 <div class="box intro">
-    <p>Manager maintain a list if data objects and a connection to the backend.</p>
+    <p>Leagues is a manager object for leagues information. It can be tied to a sport by calling leagues on a sport entity.</p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_ManagerPrototype" class="method item">
-    <h3 class="name"><code>ManagerPrototype</code></h3>
+        <div id="method_Leagues" class="method item">
+    <h3 class="name"><code>Leagues</code></h3>
 
     
         <div class="args">
@@ -143,19 +147,7 @@
             
                 <li class="arg">
                     
-                        <code>connectionCallback</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>verbose</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>useCache</code>
+                        <code>options</code>
                     
                 </li>
             
@@ -188,7 +180,7 @@
             
         
         
-        <a href="../files/lib_Manager_Prototype.js.html#l17"><code>lib&#x2F;Manager&#x2F;Prototype.js:17</code></a>
+        <a href="../files/lib_Manager_Leagues.js.html#l17"><code>lib&#x2F;Manager&#x2F;Leagues.js:17</code></a>
         
         </p>
 
@@ -210,57 +202,8 @@
             
                 <li class="param">
                     
-                        <code class="param-name">connectionCallback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>The callback function used to obtain a connection object.</p>
-
-                    </div>
-
-                    
-                        <ul class="params-list">
-                            
-                            <li class="param">
-                                
-                                    <code class="param-name">connection</code>
-                                    <span class="type">Object</span>
-                                
-
-                                <div class="param-description">
-                                    <p>The connection object the manager should use to load data.</p>
-
-                                </div>
-
-                                
-                            </li>
-                            
-                        </ul>
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">verbose</code>
-                        <span class="type">Boolean</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">useCache</code>
-                        <span class="type">Boolean</span>
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
                     
 
                     
@@ -306,37 +249,37 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                         
-                            <li class="index-item method private">
+                            <li class="index-item method private inherited">
                                 <a href="#method_log">log</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
+                            <li class="index-item method private inherited">
                                 <a href="#method_logError">logError</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
+                            <li class="index-item method inherited">
                                 <a href="#method_markAsFresh">markAsFresh</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
+                            <li class="index-item method inherited">
                                 <a href="#method_refreshAge">refreshAge</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method">
+                            <li class="index-item method inherited">
                                 <a href="#method_shouldRefresh">shouldRefresh</a>
 
                                 
@@ -351,30 +294,30 @@
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties">
+                    <ul class="index-list properties extends">
                         
-                            <li class="index-item property private">
+                            <li class="index-item property private inherited">
                                 <a href="#property_cacheTTL">cacheTTL</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property">
+                            <li class="index-item property inherited">
                                 <a href="#property_connectionCallback">connectionCallback</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
+                            <li class="index-item property private inherited">
                                 <a href="#property_name">name</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
+                            <li class="index-item property private inherited">
                                 <a href="#property_refreshDate">refreshDate</a>
 
                                 
@@ -382,13 +325,20 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_sportId">sportId</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
                                 <a href="#property_useCache">useCache</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property">
+                            <li class="index-item property inherited">
                                 <a href="#property_verbose">verbose</a>
 
                                 
@@ -409,7 +359,7 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_log" class="method item private">
+                    <div id="method_log" class="method item private inherited">
     <h3 class="name"><code>log</code></h3>
 
     
@@ -447,11 +397,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#method_log">ManagerPrototype</a>:
             
         
         
@@ -485,7 +432,7 @@
                     
 
                     <div class="param-description">
-                        
+                         
                     </div>
 
                     
@@ -501,7 +448,7 @@
 </div>
 
                 
-                    <div id="method_logError" class="method item private">
+                    <div id="method_logError" class="method item private inherited">
     <h3 class="name"><code>logError</code></h3>
 
     
@@ -539,11 +486,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#method_logError">ManagerPrototype</a>:
             
         
         
@@ -578,7 +522,7 @@
                     
 
                     <div class="param-description">
-                        
+                         
                     </div>
 
                     
@@ -594,7 +538,7 @@
 </div>
 
                 
-                    <div id="method_markAsFresh" class="method item">
+                    <div id="method_markAsFresh" class="method item inherited">
     <h3 class="name"><code>markAsFresh</code></h3>
 
     
@@ -620,11 +564,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#method_markAsFresh">ManagerPrototype</a>:
             
         
         
@@ -652,7 +593,7 @@
 </div>
 
                 
-                    <div id="method_refreshAge" class="method item">
+                    <div id="method_refreshAge" class="method item inherited">
     <h3 class="name"><code>refreshAge</code></h3>
 
     
@@ -680,11 +621,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#method_refreshAge">ManagerPrototype</a>:
             
         
         
@@ -724,7 +662,7 @@
 </div>
 
                 
-                    <div id="method_shouldRefresh" class="method item">
+                    <div id="method_shouldRefresh" class="method item inherited">
     <h3 class="name"><code>shouldRefresh</code></h3>
 
     
@@ -752,11 +690,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#method_shouldRefresh">ManagerPrototype</a>:
             
         
         
@@ -803,7 +738,7 @@
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_cacheTTL" class="property item private">
+                    <div id="property_cacheTTL" class="property item private inherited">
     <h3 class="name"><code>cacheTTL</code></h3>
     <span class="type">Number</span>
 
@@ -820,11 +755,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#property_cacheTTL">ManagerPrototype</a>:
             
         
         
@@ -849,7 +781,7 @@
 </div>
 
                 
-                    <div id="property_connectionCallback" class="property item">
+                    <div id="property_connectionCallback" class="property item inherited">
     <h3 class="name"><code>connectionCallback</code></h3>
     <span class="type">Function</span>
 
@@ -864,11 +796,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#property_connectionCallback">ManagerPrototype</a>:
             
         
         
@@ -893,7 +822,7 @@
 </div>
 
                 
-                    <div id="property_name" class="property item private">
+                    <div id="property_name" class="property item private inherited">
     <h3 class="name"><code>name</code></h3>
     <span class="type">String</span>
 
@@ -910,11 +839,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#property_name">ManagerPrototype</a>:
             
         
         
@@ -940,7 +866,7 @@
 </div>
 
                 
-                    <div id="property_refreshDate" class="property item private">
+                    <div id="property_refreshDate" class="property item private inherited">
     <h3 class="name"><code>refreshDate</code></h3>
     <span class="type">Moment</span>
 
@@ -957,11 +883,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#property_refreshDate">ManagerPrototype</a>:
             
         
         
@@ -986,9 +909,9 @@
 </div>
 
                 
-                    <div id="property_useCache" class="property item">
-    <h3 class="name"><code>useCache</code></h3>
-    <span class="type">Boolean</span>
+                    <div id="property_sportId" class="property item">
+    <h3 class="name"><code>sportId</code></h3>
+    <span class="type">String</span>
 
     
 
@@ -1006,6 +929,48 @@
                 
                 Defined in
                 
+            
+        
+        
+        <a href="../files/lib_Manager_Leagues.js.html#l31"><code>lib&#x2F;Manager&#x2F;Leagues.js:31</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The id of a sport if this league object is tied to one.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_useCache" class="property item inherited">
+    <h3 class="name"><code>useCache</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#property_useCache">ManagerPrototype</a>:
             
         
         
@@ -1030,7 +995,7 @@
 </div>
 
                 
-                    <div id="property_verbose" class="property item">
+                    <div id="property_verbose" class="property item inherited">
     <h3 class="name"><code>verbose</code></h3>
     <span class="type">Boolean</span>
 
@@ -1045,11 +1010,8 @@
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/ManagerPrototype.html#property_verbose">ManagerPrototype</a>:
             
         
         

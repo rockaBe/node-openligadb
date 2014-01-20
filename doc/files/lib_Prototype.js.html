@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/Leagues.html">Leagues</a></li>
+            
                 <li><a href="../classes/List.html">List</a></li>
             
                 <li><a href="../classes/ManagerPrototype.html">ManagerPrototype</a></li>
@@ -110,8 +112,10 @@
  * @main node-openligadb
  * @author Daniel Wetzel &lt;daniel@keksbox.com&gt;
  */
-
 &#x27;use strict&#x27;;
+
+var _ = require(&#x27;underscore&#x27;);
+var util = require(&#x27;util&#x27;);
 
 /**
  * EntityPrototype is the prototype for all entity objects.
@@ -121,9 +125,41 @@
  * @class EntityPrototype
  * @constructor
  */
-var EntityPrototype = function () {
+var EntityPrototype = function (options) {
 
-  this.connection = null;
+  /**
+   * Reads to construction options.
+   *
+   * You can pass a defaultOptions object, if you want to default to other values than the objects uses.
+   * The method sets the value of member variables depending on the options though the resulting options object is
+   * returned.
+   *
+   * @method readOptions
+   * @param options
+   * @param defaultOptions
+   * @return {Object}
+   */
+  this.readOptions = function (options, defaultOptions) {
+
+    var effectiveDefaultOptions = _.extend({verbose: false, useCache: true}, defaultOptions);
+    if (defaultOptions) {
+      effectiveDefaultOptions = _.extend(effectiveDefaultOptions, defaultOptions);
+    }
+
+    var effectiveOptions = _.extend(effectiveDefaultOptions, options);
+
+    if (effectiveOptions.connectionCallback) {
+      this.connectionCallback = effectiveOptions.connectionCallback;
+    }
+
+    var that = this;
+    Object.keys(effectiveDefaultOptions).forEach(function (property) {
+      that[property] = effectiveDefaultOptions[property];
+    });
+
+
+    return effectiveOptions;
+  };
 
 };
 

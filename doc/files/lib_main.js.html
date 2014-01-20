@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/Leagues.html">Leagues</a></li>
+            
                 <li><a href="../classes/List.html">List</a></li>
             
                 <li><a href="../classes/ManagerPrototype.html">ManagerPrototype</a></li>
@@ -127,6 +129,7 @@ var _ = require(&#x27;underscore&#x27;);
 var soap = require(&#x27;soap&#x27;);
 
 var SportsManager = require(&#x27;./Manager/Sports&#x27;);
+var LeaguesManager = require((&#x27;./Manager/Leagues&#x27;));
 /**
  * Returns the default options object.
  *
@@ -275,7 +278,26 @@ function Nodeopenligadb(options) {
    * @property sports
    * @type {Sports}
    */
-  this.sports = new SportsManager(this._createConnectionCallback(), this.isVerbose(), this.useCache());
+  this.sports = new SportsManager({
+    connectionCallback: this._createConnectionCallback(),
+    verbose:            this.isVerbose(),
+    useCache:           this.useCache()
+  });
+
+  /**
+   * The leagues manager.
+   *
+   * This instance is not tied to a sport so it will contain all leagues. If you want to deal with sports-related
+   * leagues, use the leagues function of the sport object.
+   *
+   * @property leagues
+   * @type {Leagues}
+   */
+  this.leagues = new LeaguesManager({
+    connectionCallback: this._createConnectionCallback(),
+    verbose:            this.isVerbose(),
+    useCache:           this.useCache()
+  });
 }
 
 module.exports = function (options) {

@@ -6,11 +6,20 @@
         "url": "http://danielkbx.com"
     },
     "files": {
-        "lib/Manager/Prototype.js": {
-            "name": "lib/Manager/Prototype.js",
+        "lib/Manager/Leagues.js": {
+            "name": "lib/Manager/Leagues.js",
             "modules": {
                 "Manager": 1
             },
+            "classes": {
+                "Leagues": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/Manager/Prototype.js": {
+            "name": "lib/Manager/Prototype.js",
+            "modules": {},
             "classes": {
                 "ManagerPrototype": 1
             },
@@ -81,6 +90,7 @@
             "name": "Manager",
             "submodules": {},
             "classes": {
+                "Leagues": 1,
                 "ManagerPrototype": 1,
                 "Sports": 1,
                 "List": 1
@@ -91,10 +101,10 @@
             "module": "node-openligadb",
             "file": "lib/List.js",
             "line": 12,
-            "description": "The prototype of all manager objects.",
             "tag": "main",
             "itemtype": "main",
-            "author": "Daniel Wetzel <daniel@keksbox.com>"
+            "author": "Daniel Wetzel <daniel@keksbox.com>",
+            "description": "The prototype of all manager objects."
         },
         "node-openligadb": {
             "name": "node-openligadb",
@@ -104,6 +114,7 @@
                 "Tools": 1
             },
             "classes": {
+                "Leagues": 1,
                 "ManagerPrototype": 1,
                 "Sports": 1,
                 "List": 1,
@@ -114,7 +125,7 @@
             "fors": {},
             "namespaces": {},
             "file": "lib/main.js",
-            "line": 39,
+            "line": 40,
             "tag": "main",
             "itemtype": "main",
             "description": "Wraps all interaction with the openligadb API.\n\n    var oldb = require('node-openligadb')()\n\nSupported options:\n - baseURL: the URL of the API without \"?WDSL\". Defaults to the currently valid URL.\n - verbose: true or false, indicates if you want some verbose console logs. Defaults to false.\n - useCache: true or false, wether the internal cache should be used. Defaults to true.",
@@ -136,7 +147,7 @@
             "module": "node-openligadb",
             "namespace": "",
             "file": "lib/Sport.js",
-            "line": 13,
+            "line": 15,
             "tag": "main",
             "itemtype": "main",
             "author": "Daniel Wetzel <daniel@keksbox.com>",
@@ -159,6 +170,29 @@
         }
     },
     "classes": {
+        "Leagues": {
+            "name": "Leagues",
+            "shortname": "Leagues",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "node-openligadb",
+            "submodule": "Manager",
+            "file": "lib/Manager/Leagues.js",
+            "line": 17,
+            "description": "Leagues is a manager object for leagues information. It can be tied to a sport by calling leagues on a sport entity.",
+            "extends": "ManagerPrototype",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "is_constructor": 1
+        },
         "ManagerPrototype": {
             "name": "ManagerPrototype",
             "shortname": "ManagerPrototype",
@@ -170,7 +204,7 @@
             "module": "node-openligadb",
             "submodule": "Manager",
             "file": "lib/Manager/Prototype.js",
-            "line": 14,
+            "line": 17,
             "description": "Manager maintain a list if data objects and a connection to the backend.",
             "params": [
                 {
@@ -209,21 +243,14 @@
             "module": "node-openligadb",
             "submodule": "Manager",
             "file": "lib/Manager/Sports.js",
-            "line": 18,
+            "line": 20,
             "description": "Sports objects maintain a list of available sports, e.g. Football.",
             "extends": "ManagerPrototype",
             "params": [
                 {
-                    "name": "connectionCallback",
-                    "description": ""
-                },
-                {
-                    "name": "verbose",
-                    "description": ""
-                },
-                {
-                    "name": "useCache",
-                    "description": ""
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
                 }
             ],
             "is_constructor": 1
@@ -263,7 +290,7 @@
             "submodule": "Entities",
             "namespace": "",
             "file": "lib/Prototype.js",
-            "line": 10,
+            "line": 12,
             "description": "EntityPrototype is the prototype for all entity objects.\n\nIt provides a common access to the connection which was used to load the data.",
             "is_constructor": 1
         },
@@ -279,7 +306,7 @@
             "submodule": "Entities",
             "namespace": "",
             "file": "lib/Sport.js",
-            "line": 13,
+            "line": 15,
             "description": "A sport object respresents a single sport, e.g. Football.",
             "extends": "EntityPrototype",
             "is_constructor": 1
@@ -295,7 +322,7 @@
             "module": "node-openligadb",
             "namespace": "",
             "file": "lib/main.js",
-            "line": 39,
+            "line": 40,
             "description": "Wraps all communication with the openligadb API.*",
             "params": [
                 {
@@ -308,8 +335,30 @@
     },
     "classitems": [
         {
+            "file": "lib/Manager/Leagues.js",
+            "line": 31,
+            "description": "The id of a sport if this league object is tied to one.",
+            "itemtype": "property",
+            "name": "sportId",
+            "type": "{String}",
+            "class": "Leagues",
+            "submodule": "Manager"
+        },
+        {
             "file": "lib/Manager/Prototype.js",
-            "line": 26,
+            "line": 31,
+            "description": "The name of the manager, used for logging.",
+            "itemtype": "property",
+            "name": "name",
+            "access": "private",
+            "tagname": "",
+            "type": "{string}",
+            "class": "ManagerPrototype",
+            "submodule": "Manager"
+        },
+        {
+            "file": "lib/Manager/Prototype.js",
+            "line": 40,
             "itemtype": "property",
             "name": "connectionCallback",
             "type": "{Function}",
@@ -318,7 +367,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 32,
+            "line": 46,
             "itemtype": "property",
             "name": "verbose",
             "type": "{boolean}",
@@ -327,7 +376,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 38,
+            "line": 52,
             "itemtype": "property",
             "name": "useCache",
             "type": "{boolean}",
@@ -336,7 +385,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 44,
+            "line": 58,
             "itemtype": "property",
             "name": "cacheTTL",
             "access": "private",
@@ -347,7 +396,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 51,
+            "line": 65,
             "itemtype": "property",
             "name": "refreshDate",
             "access": "private",
@@ -358,7 +407,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 58,
+            "line": 72,
             "description": "Returns the age of the data in seconds.\n\nWhen calling markAsFresh the current time is saved. This method calculates the age since this moment.",
             "itemtype": "method",
             "name": "refreshAge",
@@ -371,7 +420,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 77,
+            "line": 91,
             "description": "Marks the current manager data as fresh.\n\nEvery inherited object should call this method right after refreshing its data.",
             "itemtype": "method",
             "name": "markAsFresh",
@@ -381,7 +430,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 92,
+            "line": 106,
             "description": "Returns true if the data should be refresh from the backend.",
             "itemtype": "method",
             "name": "shouldRefresh",
@@ -394,7 +443,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 109,
+            "line": 123,
             "description": "Logs an string if logging is enabled.",
             "itemtype": "method",
             "name": "log",
@@ -413,7 +462,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 124,
+            "line": 138,
             "description": "Logs an error.\n\nIt does not matter if logging is enabled.",
             "itemtype": "method",
             "name": "logError",
@@ -432,7 +481,7 @@
         },
         {
             "file": "lib/Manager/Sports.js",
-            "line": 32,
+            "line": 35,
             "itemtype": "property",
             "name": "data",
             "type": "{List}",
@@ -441,7 +490,7 @@
         },
         {
             "file": "lib/Manager/Sports.js",
-            "line": 38,
+            "line": 41,
             "description": "Refreshes the sports data.\n\nCaching is performed internally, so any consumer does not need to care about. The callback is called asynchronously,\neven when the data is loaded from the cache.\nIf the data is loaded from the backend, the method returns true. If the data is loaded from the cache, false is\nreturned.",
             "itemtype": "method",
             "name": "refresh",
@@ -552,8 +601,87 @@
             "submodule": "Manager"
         },
         {
+            "file": "lib/Prototype.js",
+            "line": 22,
+            "description": "Reads to construction options.\n\nYou can pass a defaultOptions object, if you want to default to other values than the objects uses.\nThe method sets the value of member variables depending on the options though the resulting options object is\nreturned.",
+            "itemtype": "method",
+            "name": "readOptions",
+            "params": [
+                {
+                    "name": "options",
+                    "description": ""
+                },
+                {
+                    "name": "defaultOptions",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "EntityPrototype",
+            "module": "node-openligadb",
+            "submodule": "Entities"
+        },
+        {
+            "file": "lib/Sport.js",
+            "line": 26,
+            "description": "Holds an instance to a leagues manager instance which is tied to this sport.",
+            "itemtype": "property",
+            "name": "leagues",
+            "access": "private",
+            "tagname": "",
+            "type": "{Leagues}",
+            "class": "Sport",
+            "module": "node-openligadb",
+            "submodule": "Entities"
+        },
+        {
+            "file": "lib/Sport.js",
+            "line": 37,
+            "description": "Returns the id of the sport.\n\nThe method is a proxy for the internal name defined by the API.",
+            "itemtype": "method",
+            "name": "id",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Sport",
+            "module": "node-openligadb",
+            "submodule": "Entities"
+        },
+        {
+            "file": "lib/Sport.js",
+            "line": 53,
+            "description": "Returns the name of the sport.\n\nThe method is a proxy for the internal name defined by the API.",
+            "itemtype": "method",
+            "name": "name",
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Sport",
+            "module": "node-openligadb",
+            "submodule": "Entities"
+        },
+        {
+            "file": "lib/Sport.js",
+            "line": 69,
+            "description": "Returns a leagues manager object.",
+            "itemtype": "method",
+            "name": "leagues",
+            "return": {
+                "description": "",
+                "type": "Leagues"
+            },
+            "class": "Sport",
+            "module": "node-openligadb",
+            "submodule": "Entities"
+        },
+        {
             "file": "lib/main.js",
-            "line": 24,
+            "line": 25,
             "description": "Returns the default options object.",
             "itemtype": "method",
             "name": "_defaultOptions",
@@ -568,7 +696,7 @@
         },
         {
             "file": "lib/main.js",
-            "line": 51,
+            "line": 52,
             "description": "Checks if the module is in verbose mode.",
             "itemtype": "method",
             "name": "isVerbose",
@@ -583,7 +711,7 @@
         },
         {
             "file": "lib/main.js",
-            "line": 62,
+            "line": 63,
             "description": "Checks if the internal cache should be used.",
             "itemtype": "method",
             "name": "useCache",
@@ -598,7 +726,7 @@
         },
         {
             "file": "lib/main.js",
-            "line": 73,
+            "line": 74,
             "description": "Returns the URL used to connect to the endpoint's SOAP server.",
             "itemtype": "method",
             "name": "WSDLURL",
@@ -613,7 +741,7 @@
         },
         {
             "file": "lib/main.js",
-            "line": 84,
+            "line": 85,
             "description": "Checks if the connection has been established.",
             "itemtype": "method",
             "name": "isConnected",
@@ -626,7 +754,7 @@
         },
         {
             "file": "lib/main.js",
-            "line": 94,
+            "line": 95,
             "description": "Opens the SOAP connection to the server.",
             "itemtype": "method",
             "name": "openConnection",
@@ -657,7 +785,7 @@
         },
         {
             "file": "lib/main.js",
-            "line": 135,
+            "line": 136,
             "description": "Creates a connection callback function.\n\nIt is used to create the manager objects which call the function to obtain a valid connection.",
             "itemtype": "method",
             "name": "_createConnectionCallback",
@@ -672,11 +800,21 @@
         },
         {
             "file": "lib/main.js",
-            "line": 166,
+            "line": 167,
             "description": "The sports manager.",
             "itemtype": "property",
             "name": "sports",
             "type": "{Sports}",
+            "class": "Nodeopenligadb",
+            "module": "node-openligadb"
+        },
+        {
+            "file": "lib/main.js",
+            "line": 179,
+            "description": "The leagues manager.\n\nThis instance is not tied to a sport so it will contain all leagues. If you want to deal with sports-related\nleagues, use the leagues function of the sport object.",
+            "itemtype": "property",
+            "name": "leagues",
+            "type": "{Leagues}",
             "class": "Nodeopenligadb",
             "module": "node-openligadb"
         },

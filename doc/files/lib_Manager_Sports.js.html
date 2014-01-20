@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/Leagues.html">Leagues</a></li>
+            
                 <li><a href="../classes/List.html">List</a></li>
             
                 <li><a href="../classes/ManagerPrototype.html">ManagerPrototype</a></li>
@@ -121,109 +123,138 @@ var List = require(&#x27;../List&#x27;);
 var EntityPrototype = require(&#x27;../Prototype&#x27;);
 var SportEntity = require(&#x27;../Sport&#x27;);
 
+var Leagues = require(&#x27;./Leagues&#x27;);
+
 /**
  * Sports objects maintain a list of available sports, e.g. Football.
  *
  * @class Sports
  * @extends ManagerPrototype
- * @param connectionCallback
- * @param verbose
- * @param useCache
+ * @param {Object} options
  * @constructor
  */
-var Sports = function (connectionCallback, verbose, useCache) {
+var Sports = function (options) {
 
-  Sports.super_.apply(this, arguments);
+    Sports.super_.apply(this, arguments);
+    this.readOptions(options);
 
-  /**
-   * @property data
-   * @type {List}
-   */
-  this.data = new List();
+    this.name = &#x27;Sports&#x27;; // the logging name
 
-  /**
-   * Refreshes the sports data.
-   *
-   * Caching is performed internally, so any consumer does not need to care about. The callback is called asynchronously,
-   * even when the data is loaded from the cache.
-   * If the data is loaded from the backend, the method returns true. If the data is loaded from the cache, false is
-   * returned.
-   *
-   * @method refresh
-   * @param {Function} callback The callback function called after refreshing.
-   * @param {String} callback.err The error if something went wrong while refreshing.
-   * @param {Array} callback.sports An array containing all sports objects.
-   * @return {Boolean}
-   */
-  this.refresh = function (callback) {
+    /**
+     * @property data
+     * @type {List}
+     */
+    this.data = new List();
 
-    if (this.shouldRefresh()) {
-      this.log(&#x27;Performing full refresh sports data.&#x27;);
-      // we need to refresh the data
-      var that = this;
-      this.connectionCallback(function onConnection(connection) {
+    /**
+     * Refreshes the sports data.
+     *
+     * Caching is performed internally, so any consumer does not need to care about. The callback is called asynchronously,
+     * even when the data is loaded from the cache.
+     * If the data is loaded from the backend, the method returns true. If the data is loaded from the cache, false is
+     * returned.
+     *
+     * @method refresh
+     * @param {Function} callback The callback function called after refreshing.
+     * @param {String} callback.err The error if something went wrong while refreshing.
+     * @param {Array} callback.sports An array containing all sports objects.
+     * @return {Boolean}
+     */
+    this.refresh = function (callback) {
 
-        if (connection) {
-          connection.GetAvailSports(function onLoadedSports(err, result) {
+      if (this.shouldRefresh()) {
+        this.log(&#x27;Performing full refresh sports data.&#x27;);
+        // we need to refresh the data
+        var that = this;
+        this.connectionCallback(function onConnection(connection) {
 
-            if (err) {
-              that.logError(err);
-            }
+            if (connection) {
+              connection.GetAvailSports(function onLoadedSports(err, result) {
 
-            if (result &amp;&amp; result.GetAvailSportsResult) {
-              if (_.isArray(result.GetAvailSportsResult.Sport)) {
-
-                result.GetAvailSportsResult.Sport.forEach(function forEach(item) {
-
-                  if (item.sportsID) {
-                    var sport = that.data.itemWithId(item.sportsID.toString());
-
-                    if (_.isNull(sport)) {
-                      sport = new SportEntity();
-                    }
-
-                    sport = Object.spawn(sport, item);
-                    that.data.addItem(sport);
+                  if (err) {
+                    that.logError(err);
                   }
 
-                });
+                  if (result &amp;&amp; result.GetAvailSportsResult) {
+                    if (_.isArray(result.GetAvailSportsResult.Sport)) {
 
+                      that.log(&#x27;Loaded &#x27; + result.GetAvailSportsResult.Sport.length + &#x27; sport objects&#x27;);
+
+                      result.GetAvailSportsResult.Sport.forEach(function forEach(item) {
+
+                        if (item.sportsID) {
+                          var sport = that.data.itemWithId(item.sportsID.toString());
+
+                          if (_.isNull(sport)) {
+
+                            // first, we create the corresponding leagues object
+                            var theLeagues = new Leagues({
+                              connectionCallback: that.connectionCallback,
+                              verbose: that.verbose,
+                              useCache: that.useCache,
+                              sportId: item.sportsID.toString()
+                            });
+
+                            // then the sport including the leagues
+                            sport = new SportEntity({
+                              leagues: theLeagues
+                            });
+
+
+
+
+                          }
+
+                          sport = Object.spawn(sport, item);
+                          that.data.addItem(sport);
+                        }
+                      });
+                    }
+                  }
+
+                  that.markAsFresh();
+
+                  if (callback) {
+                    callback(err, that.data.items());
+                  }
+
+                }
+              )
+              ;
+
+            }
+            else {
+              // we did not get a valid connection
+              if (callback) {
+                process.nextTick(callback(new Error(&#x27;No connection&#x27;, 1), null));
               }
             }
 
-            that.markAsFresh();
-
-            if (callback) {
-              callback(err, that.data.items());
-            }
-
-          });
-
-        } else {
-          // we did not get a valid connection
-          if (callback) {
-            process.nextTick(callback(new Error(&#x27;No connection&#x27;, 1), null));
           }
+        )
+        ;
+
+        // returning true if we&#x27;re about to refresh from the backend
+        return true;
+      }
+      else {
+        // no need to refresh
+        this.log(&#x27;Using cached sports data.&#x27;);
+        if (callback) {
+          var cThat = this;
+          process.nextTick(function () {
+            callback(null, cThat.data.items());
+          });
         }
 
-      });
-
-      // returning true if we&#x27;re about to refresh from the backend
-      return true;
-    } else {
-      // no need to refresh
-      this.log(&#x27;Using cached sports data.&#x27;);
-      if (callback) {
-        process.nextTick(callback(null, this.data.items()));
+        // returning false if we load the data from the cache
+        return false;
       }
-
-      // returning false if we load the data from the cache
-      return false;
-    }
-  };
+    };
 
 
-};
+  }
+  ;
 
 util.inherits(Sports, ManagerPrototype);
 

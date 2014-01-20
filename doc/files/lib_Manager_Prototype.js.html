@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/Leagues.html">Leagues</a></li>
+            
                 <li><a href="../classes/List.html">List</a></li>
             
                 <li><a href="../classes/ManagerPrototype.html">ManagerPrototype</a></li>
@@ -115,7 +117,10 @@
 &#x27;use strict&#x27;;
 
 var _ = require(&#x27;underscore&#x27;);
+var util = require(&#x27;util&#x27;);
 var moment = require(&#x27;moment&#x27;);
+
+var EntityPrototype = require(&#x27;../Prototype&#x27;);
 
 /**
  * Manager maintain a list if data objects and a connection to the backend.
@@ -127,25 +132,36 @@ var moment = require(&#x27;moment&#x27;);
  * @param {Boolean} useCache
  * @constructor
  */
-var ManagerPrototype = function (connectionCallback, verbose, useCache) {
+var ManagerPrototype = function (options) {
+
+  ManagerPrototype.super_.apply(this, arguments);
+
+  /**
+   * The name of the manager, used for logging.
+   *
+   * @property name
+   * @private
+   * @type {string}
+   */
+  this.name = &#x27;ManagerPrototype&#x27;;
 
   /**
    * @property connectionCallback
    * @type {Function}
    */
-  this.connectionCallback = connectionCallback;
+  this.connectionCallback = null;
 
   /**
    * @property verbose
    * @type {boolean}
    */
-  this.verbose = verbose;
+  this.verbose = false;
 
   /**
    * @property useCache
    * @type {boolean}
    */
-  this.useCache = useCache;
+  this.useCache = true;
 
   /**
    * @property cacheTTL
@@ -207,7 +223,7 @@ var ManagerPrototype = function (connectionCallback, verbose, useCache) {
       var age = this.refreshAge();
       return (age &gt; this.cacheTTL);
     } else {
-      return false;
+      return true;
     }
 
   };
@@ -222,7 +238,7 @@ var ManagerPrototype = function (connectionCallback, verbose, useCache) {
    */
   this.log = function (info) {
     if (this.verbose) {
-      console.log(&#x27;INFO: &#x27; + info);
+      console.log(&#x27;INFO (&#x27; + this.name + &#x27;): &#x27; + info);
     }
     return this;
   };
@@ -238,12 +254,13 @@ var ManagerPrototype = function (connectionCallback, verbose, useCache) {
    * @private
    */
   this.logError = function (err) {
-    console.log(&#x27;ERR: &#x27; + err);
+    console.log(&#x27;ERR (&#x27; + this.name + &#x27;): &#x27; + err);
     return this;
   };
 
 };
 
+util.inherits(ManagerPrototype, EntityPrototype);
 module.exports = ManagerPrototype;
     </pre>
 </div>
