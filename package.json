@@ -7,7 +7,9 @@
   "dependencies":    {
     "soap":       ">= 0.3.1",
     "underscore": ">=1.5.2",
-    "moment":     "latest"
+    "moment":     "latest",
+    "step":       ">=0.0.5",
+    "async":      ">=0.2.9"
   },
   "devDependencies": {
     "vows":   "0.5.x",
