@@ -2,6 +2,7 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "EntityPrototype",
+        "League",
         "Leagues",
         "List",
         "ManagerPrototype",
@@ -19,7 +20,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "Entities",
             "name": "Entities",
-            "description": "EntityPrototype is the prototype for all entity objects.\n\nIt provides a common access to the connection which was used to load the data."
+            "description": "A league entity represents a sport league."
         },
         {
             "displayName": "Manager",

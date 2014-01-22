@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/League.html">League</a></li>
+            
                 <li><a href="../classes/Leagues.html">Leagues</a></li>
             
                 <li><a href="../classes/List.html">List</a></li>
@@ -219,21 +221,7 @@
                     <ul class="index-list methods extends">
                         
                             <li class="index-item method">
-                                <a href="#method_id">id</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
                                 <a href="#method_leagues">leagues</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_name">name</a>
 
                                 
                                 
@@ -256,8 +244,22 @@
 
                     <ul class="index-list properties extends">
                         
+                            <li class="index-item property">
+                                <a href="#property_id">id</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property private">
-                                <a href="#property_leagues">leagues</a>
+                                <a href="#property_leaguesManager">leaguesManager</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_name">name</a>
 
                                 
                                 
@@ -275,78 +277,6 @@
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method_id" class="method item">
-    <h3 class="name"><code>id</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_Sport.js.html#l37"><code>lib&#x2F;Sport.js:37</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns the id of the sport.</p>
-<p>The method is a proxy for the internal name defined by the API.</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">String</span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
 
                 
                     <div id="method_leagues" class="method item">
@@ -385,7 +315,7 @@
             
         
         
-        <a href="../files/lib_Sport.js.html#l69"><code>lib&#x2F;Sport.js:69</code></a>
+        <a href="../files/lib_Sport.js.html#l54"><code>lib&#x2F;Sport.js:54</code></a>
         
         </p>
 
@@ -410,78 +340,6 @@
                 
                     
                         <span class="type"><a href="../classes/Leagues.html" class="crosslink">Leagues</a></span>:
-                    
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_name" class="method item">
-    <h3 class="name"><code>name</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type"></span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_Sport.js.html#l53"><code>lib&#x2F;Sport.js:53</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Returns the name of the sport.</p>
-<p>The method is a proxy for the internal name defined by the API.</p>
-
-    </div>
-
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"></span>:
                     
                 
             </div>
@@ -625,8 +483,53 @@ returned.</p>
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_leagues" class="property item private">
-    <h3 class="name"><code>leagues</code></h3>
+                    <div id="property_id" class="property item">
+    <h3 class="name"><code>id</code></h3>
+    <span class="type">String | Null</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_Sport.js.html#l37"><code>lib&#x2F;Sport.js:37</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The id of the sport.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_leaguesManager" class="property item private">
+    <h3 class="name"><code>leaguesManager</code></h3>
     <span class="type"><a href="../classes/Leagues.html" class="crosslink">Leagues</a></span>
 
     
@@ -661,6 +564,51 @@ returned.</p>
 
     <div class="description">
         <p>Holds an instance to a leagues manager instance which is tied to this sport.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_name" class="property item">
+    <h3 class="name"><code>name</code></h3>
+    <span class="type">String | Null</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_Sport.js.html#l45"><code>lib&#x2F;Sport.js:45</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The name of the sport.</p>
 
     </div>
 

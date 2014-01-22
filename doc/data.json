@@ -35,11 +35,21 @@
             "fors": {},
             "namespaces": {}
         },
+        "lib/League.js": {
+            "name": "lib/League.js",
+            "modules": {
+                "node-openligadb": 1,
+                "Entities": 1
+            },
+            "classes": {
+                "League": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "lib/List.js": {
             "name": "lib/List.js",
-            "modules": {
-                "node-openligadb": 1
-            },
+            "modules": {},
             "classes": {
                 "List": 1
             },
@@ -48,9 +58,7 @@
         },
         "lib/Prototype.js": {
             "name": "lib/Prototype.js",
-            "modules": {
-                "Entities": 1
-            },
+            "modules": {},
             "classes": {
                 "EntityPrototype": 1
             },
@@ -117,6 +125,7 @@
                 "Leagues": 1,
                 "ManagerPrototype": 1,
                 "Sports": 1,
+                "League": 1,
                 "List": 1,
                 "EntityPrototype": 1,
                 "Sport": 1,
@@ -138,6 +147,7 @@
             "name": "Entities",
             "submodules": {},
             "classes": {
+                "League": 1,
                 "EntityPrototype": 1,
                 "Sport": 1
             },
@@ -151,7 +161,7 @@
             "tag": "main",
             "itemtype": "main",
             "author": "Daniel Wetzel <daniel@keksbox.com>",
-            "description": "EntityPrototype is the prototype for all entity objects.\n\nIt provides a common access to the connection which was used to load the data."
+            "description": "A league entity represents a sport league."
         },
         "Tools": {
             "name": "Tools",
@@ -181,7 +191,7 @@
             "module": "node-openligadb",
             "submodule": "Manager",
             "file": "lib/Manager/Leagues.js",
-            "line": 17,
+            "line": 18,
             "description": "Leagues is a manager object for leagues information. It can be tied to a sport by calling leagues on a sport entity.",
             "extends": "ManagerPrototype",
             "params": [
@@ -204,7 +214,7 @@
             "module": "node-openligadb",
             "submodule": "Manager",
             "file": "lib/Manager/Prototype.js",
-            "line": 17,
+            "line": 16,
             "description": "Manager maintain a list if data objects and a connection to the backend.",
             "params": [
                 {
@@ -251,6 +261,28 @@
                     "name": "options",
                     "description": "",
                     "type": "Object"
+                }
+            ],
+            "is_constructor": 1
+        },
+        "League": {
+            "name": "League",
+            "shortname": "League",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "node-openligadb",
+            "submodule": "Entities",
+            "namespace": "",
+            "file": "lib/League.js",
+            "line": 14,
+            "description": "A league entity represents a sport league.",
+            "params": [
+                {
+                    "name": "options",
+                    "description": ""
                 }
             ],
             "is_constructor": 1
@@ -336,7 +368,7 @@
     "classitems": [
         {
             "file": "lib/Manager/Leagues.js",
-            "line": 31,
+            "line": 32,
             "description": "The id of a sport if this league object is tied to one.",
             "itemtype": "property",
             "name": "sportId",
@@ -345,8 +377,17 @@
             "submodule": "Manager"
         },
         {
+            "file": "lib/Manager/Leagues.js",
+            "line": 42,
+            "itemtype": "property",
+            "name": "data",
+            "type": "{List}",
+            "class": "Leagues",
+            "submodule": "Manager"
+        },
+        {
             "file": "lib/Manager/Prototype.js",
-            "line": 31,
+            "line": 30,
             "description": "The name of the manager, used for logging.",
             "itemtype": "property",
             "name": "name",
@@ -358,7 +399,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 40,
+            "line": 39,
             "itemtype": "property",
             "name": "connectionCallback",
             "type": "{Function}",
@@ -367,7 +408,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 46,
+            "line": 45,
             "itemtype": "property",
             "name": "verbose",
             "type": "{boolean}",
@@ -376,7 +417,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 52,
+            "line": 51,
             "itemtype": "property",
             "name": "useCache",
             "type": "{boolean}",
@@ -385,7 +426,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 58,
+            "line": 57,
             "itemtype": "property",
             "name": "cacheTTL",
             "access": "private",
@@ -396,7 +437,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 65,
+            "line": 64,
             "itemtype": "property",
             "name": "refreshDate",
             "access": "private",
@@ -407,7 +448,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 72,
+            "line": 71,
             "description": "Returns the age of the data in seconds.\n\nWhen calling markAsFresh the current time is saved. This method calculates the age since this moment.",
             "itemtype": "method",
             "name": "refreshAge",
@@ -420,7 +461,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 91,
+            "line": 89,
             "description": "Marks the current manager data as fresh.\n\nEvery inherited object should call this method right after refreshing its data.",
             "itemtype": "method",
             "name": "markAsFresh",
@@ -430,7 +471,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 106,
+            "line": 104,
             "description": "Returns true if the data should be refresh from the backend.",
             "itemtype": "method",
             "name": "shouldRefresh",
@@ -443,7 +484,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 123,
+            "line": 119,
             "description": "Logs an string if logging is enabled.",
             "itemtype": "method",
             "name": "log",
@@ -462,7 +503,7 @@
         },
         {
             "file": "lib/Manager/Prototype.js",
-            "line": 138,
+            "line": 134,
             "description": "Logs an error.\n\nIt does not matter if logging is enabled.",
             "itemtype": "method",
             "name": "logError",
@@ -521,6 +562,50 @@
             "submodule": "Manager"
         },
         {
+            "file": "lib/League.js",
+            "line": 27,
+            "description": "The id of the league.",
+            "itemtype": "property",
+            "name": "id",
+            "type": "{String|null}",
+            "class": "League",
+            "module": "node-openligadb",
+            "submodule": "Entities"
+        },
+        {
+            "file": "lib/League.js",
+            "line": 35,
+            "description": "The full name of the league.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "{String|null}",
+            "class": "League",
+            "module": "node-openligadb",
+            "submodule": "Entities"
+        },
+        {
+            "file": "lib/League.js",
+            "line": 43,
+            "description": "The shortname of the league.",
+            "itemtype": "property",
+            "name": "shortName",
+            "type": "{String|null}",
+            "class": "League",
+            "module": "node-openligadb",
+            "submodule": "Entities"
+        },
+        {
+            "file": "lib/League.js",
+            "line": 51,
+            "description": "The term of the league. Each term has its own instance of the same real-world league.",
+            "itemtype": "property",
+            "name": "term",
+            "type": "{String|null}",
+            "class": "League",
+            "module": "node-openligadb",
+            "submodule": "Entities"
+        },
+        {
             "file": "lib/List.js",
             "line": 21,
             "itemtype": "property",
@@ -561,7 +646,7 @@
         {
             "file": "lib/List.js",
             "line": 46,
-            "description": "Returns the item with the given id.\n\nThis works by comparing the result of the id() function of all items with the parameter. Therefore, this only works\nwith objects with a function named id returning a \"String\".",
+            "description": "Returns the item with the given id.\n\nThis works by comparing the result of the id property of all items with the parameter. Therefore, this only works\nwith objects with a function named id returning a \"String\".",
             "itemtype": "method",
             "name": "itemWithId",
             "params": [
@@ -582,7 +667,7 @@
         {
             "file": "lib/List.js",
             "line": 74,
-            "description": "Adds an item to the list.\n\nBefore adding the item, the method checks if the item has a function id() of type \"String\". If, after calling this\nmethod, the item is part of this list, it return true, otherwise false.\n\nThe list is id-unique. You cannot add multiple items with the same id.",
+            "description": "Adds an item to the list.\n\nBefore adding the item, the method checks if the item has a property id. If, after calling this\nmethod, the item is part of this list, it return true, otherwise false.\n\nThe list is id-unique. You cannot add multiple items with the same id.",
             "itemtype": "method",
             "name": "addItem",
             "params": [
@@ -629,7 +714,7 @@
             "line": 26,
             "description": "Holds an instance to a leagues manager instance which is tied to this sport.",
             "itemtype": "property",
-            "name": "leagues",
+            "name": "leaguesManager",
             "access": "private",
             "tagname": "",
             "type": "{Leagues}",
@@ -640,34 +725,28 @@
         {
             "file": "lib/Sport.js",
             "line": 37,
-            "description": "Returns the id of the sport.\n\nThe method is a proxy for the internal name defined by the API.",
-            "itemtype": "method",
+            "description": "The id of the sport.",
+            "itemtype": "property",
             "name": "id",
-            "return": {
-                "description": "",
-                "type": "String"
-            },
+            "type": "{String|null}",
             "class": "Sport",
             "module": "node-openligadb",
             "submodule": "Entities"
         },
         {
             "file": "lib/Sport.js",
-            "line": 53,
-            "description": "Returns the name of the sport.\n\nThe method is a proxy for the internal name defined by the API.",
-            "itemtype": "method",
+            "line": 45,
+            "description": "The name of the sport.",
+            "itemtype": "property",
             "name": "name",
-            "return": {
-                "description": "",
-                "type": "*"
-            },
+            "type": "{String|null}",
             "class": "Sport",
             "module": "node-openligadb",
             "submodule": "Entities"
         },
         {
             "file": "lib/Sport.js",
-            "line": 69,
+            "line": 54,
             "description": "Returns a leagues manager object.",
             "itemtype": "method",
             "name": "leagues",
@@ -820,7 +899,7 @@
         },
         {
             "file": "lib/tools.js",
-            "line": 16,
+            "line": 17,
             "description": "Removes entries from an array.\n\nBy John Resig (MIT Licensed)",
             "itemtype": "method",
             "name": "remove",
@@ -847,7 +926,7 @@
         },
         {
             "file": "lib/tools.js",
-            "line": 40,
+            "line": 41,
             "description": "Removes an item form the array.",
             "itemtype": "method",
             "name": "removeItem",

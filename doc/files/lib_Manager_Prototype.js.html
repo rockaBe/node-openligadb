@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/League.html">League</a></li>
+            
                 <li><a href="../classes/Leagues.html">Leagues</a></li>
             
                 <li><a href="../classes/List.html">List</a></li>
@@ -113,7 +115,6 @@
  * @main node-openligadb
  * @author Daniel Wetzel &lt;daniel@keksbox.com&gt;
  */
-
 &#x27;use strict&#x27;;
 
 var _ = require(&#x27;underscore&#x27;);
@@ -186,7 +187,6 @@ var ManagerPrototype = function (options) {
    * @return {number}
    */
   this.refreshAge = function () {
-
     if (_.isNull(this.refreshDate)) {
       return 10000000; // something really big
     }
@@ -218,14 +218,12 @@ var ManagerPrototype = function (options) {
    * @return {boolean}
    */
   this.shouldRefresh = function shouldRefresh() {
-
     if (this.useCache) {
       var age = this.refreshAge();
       return (age &gt; this.cacheTTL);
     } else {
       return true;
     }
-
   };
 
   /**

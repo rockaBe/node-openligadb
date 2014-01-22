@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/League.html">League</a></li>
+            
                 <li><a href="../classes/Leagues.html">Leagues</a></li>
             
                 <li><a href="../classes/List.html">List</a></li>
@@ -154,7 +156,7 @@ var List = function (useCache) {
   /**
    * Returns the item with the given id.
    *
-   * This works by comparing the result of the id() function of all items with the parameter. Therefore, this only works
+   * This works by comparing the result of the id property of all items with the parameter. Therefore, this only works
    * with objects with a function named id returning a &quot;String&quot;.
    *
    * @method itemWithId
@@ -167,8 +169,8 @@ var List = function (useCache) {
     if (_.isString(id)) {
 
       this.data.forEach(function iterate(candidate) {
-        if (candidate.id &amp;&amp; _.isFunction(candidate.id)) {
-          if (candidate.id() === id) {
+        if (candidate.id) {
+          if (candidate.id === id) {
             item = candidate;
             return;
           }
@@ -182,7 +184,7 @@ var List = function (useCache) {
   /**
    * Adds an item to the list.
    *
-   * Before adding the item, the method checks if the item has a function id() of type &quot;String&quot;. If, after calling this
+   * Before adding the item, the method checks if the item has a property id. If, after calling this
    * method, the item is part of this list, it return true, otherwise false.
    *
    * The list is id-unique. You cannot add multiple items with the same id.
@@ -193,15 +195,14 @@ var List = function (useCache) {
    */
   this.addItem = function (item) {
 
-    if (item.id &amp;&amp; _.isFunction(item.id)) {
-      if (_.isNull(this.itemWithId(item.id()))) {
+    if (item.id) {
+      if (_.isNull(this.itemWithId(item.id))) {
         this.data.push(item);
       }
       return true;
     }
     return false;
   };
-
 };
 
 module.exports = List;

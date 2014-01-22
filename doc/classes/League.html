@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>EntityPrototype - node-openligadb</title>
+    <title>League - node-openligadb</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,7 +104,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>EntityPrototype Class</h1>
+                        <h1>League Class</h1>
 <div class="box meta">
     
 
@@ -112,7 +112,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_Prototype.js.html#l12"><code>lib&#x2F;Prototype.js:12</code></a>
+            Defined in: <a href="../files/lib_League.js.html#l14"><code>lib&#x2F;League.js:14</code></a>
         </div>
     
 
@@ -129,117 +129,15 @@
 
 
 <div class="box intro">
-    <p>EntityPrototype is the prototype for all entity objects.</p>
-<p>It provides a common access to the connection which was used to load the data.</p>
+    <p>A league entity represents a sport league.</p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_EntityPrototype" class="method item">
-    <h3 class="name"><code>EntityPrototype</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_Prototype.js.html#l12"><code>lib&#x2F;Prototype.js:12</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-    </div>
-
-
-<div id="classdocs" class="tabview">
-    <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="#index">Index</a></li>
-
-        
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-        
-        
-        
-        
-    </ul>
-
-    <div>
-        <div id="index" class="api-class-tabpanel index">
-            <h2 class="off-left">Item Index</h2>
-
-            
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods">
-                        
-                            <li class="index-item method">
-                                <a href="#method_readOptions">readOptions</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
-
-            
-
-            
-
-            
-        </div>
-
-        
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method_readOptions" class="method item">
-    <h3 class="name"><code>readOptions</code></h3>
+        <div id="method_League" class="method item">
+    <h3 class="name"><code>League</code></h3>
 
     
         <div class="args">
@@ -251,20 +149,10 @@
                     
                 </li>
             
-                <li class="arg">
-                    
-                        <code>defaultOptions</code>
-                    
-                </li>
-            
             </ul><span class="paren">)</span>
         </div>
     
 
-    
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
     
 
     
@@ -290,7 +178,7 @@
             
         
         
-        <a href="../files/lib_Prototype.js.html#l22"><code>lib&#x2F;Prototype.js:22</code></a>
+        <a href="../files/lib_League.js.html#l14"><code>lib&#x2F;League.js:14</code></a>
         
         </p>
 
@@ -301,11 +189,7 @@
     </div>
 
     <div class="description">
-        <p>Reads to construction options.</p>
-<p>You can pass a defaultOptions object, if you want to default to other values than the objects uses.
-The method sets the value of member variables depending on the options though the resulting options object is
-returned.</p>
-
+        
     </div>
 
     
@@ -329,37 +213,260 @@ returned.</p>
                     
                 </li>
             
-                <li class="param">
-                    
-                        <code class="param-name">defaultOptions</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                         
-                    </div>
-
-                    
-                </li>
-            
             </ul>
         </div>
     
 
     
-        <div class="returns">
-            <h4>Returns:</h4>
 
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Object</span>:
-                    
-                
-            </div>
+    
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_id">id</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_name">name</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_shortName">shortName</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_term">term</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
         </div>
+
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_id" class="property item">
+    <h3 class="name"><code>id</code></h3>
+    <span class="type">String | Null</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_League.js.html#l27"><code>lib&#x2F;League.js:27</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The id of the league.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_name" class="property item">
+    <h3 class="name"><code>name</code></h3>
+    <span class="type">String | Null</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_League.js.html#l35"><code>lib&#x2F;League.js:35</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The full name of the league.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_shortName" class="property item">
+    <h3 class="name"><code>shortName</code></h3>
+    <span class="type">String | Null</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_League.js.html#l43"><code>lib&#x2F;League.js:43</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The shortname of the league.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_term" class="property item">
+    <h3 class="name"><code>term</code></h3>
+    <span class="type">String | Null</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_League.js.html#l51"><code>lib&#x2F;League.js:51</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The term of the league. Each term has its own instance of the same real-world league.</p>
+
+    </div>
+
+    
+
     
 
     
@@ -367,8 +474,6 @@ returned.</p>
 
                 
             </div>
-        
-
         
 
         

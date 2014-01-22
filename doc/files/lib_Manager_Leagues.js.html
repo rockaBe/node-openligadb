@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/League.html">League</a></li>
+            
                 <li><a href="../classes/Leagues.html">Leagues</a></li>
             
                 <li><a href="../classes/List.html">List</a></li>
@@ -121,6 +123,7 @@ var ManagerPrototype = require(&#x27;./Prototype&#x27;);
 var List = require(&#x27;../List&#x27;);
 
 var EntityPrototype = require(&#x27;../Prototype&#x27;);
+var LeagueEntity = require(&#x27;../League&#x27;);
 
 /**
  * Leagues is a manager object for leagues information. It can be tied to a sport by calling leagues on a sport entity.
@@ -144,11 +147,96 @@ var Leagues = function (options) {
    */
   this.sportId = null;
 
-
   this.readOptions(options, {sportId: null});
 
+  /**
+   * @property data
+   * @type {List}
+   */
+  this.data = new List();
+
+  this.refresh = function (callback) {
+
+    if (this.shouldRefresh()) {
+      this.log(&#x27;Performing full refresh of leagues data.&#x27;);
+
+      var that = this;
+      this.connectionCallback(function onConnection(connection) {
+
+        if (connection) {
+
+          var handleRefreshResponse = function (err, result) {
+
+            if (err) {
+              that.logError(err);
+            }
+
+            var loadedData = null;
+            if (result) {
+              if (result.GetAvailLeaguesResult &amp;&amp; result.GetAvailLeaguesResult.League &amp;&amp; _.isArray(result.GetAvailLeaguesResult.League)) {
+                loadedData = result.GetAvailLeaguesResult.League;
+              } else if (result.GetAvailLeaguesBySportsResult &amp;&amp; result.GetAvailLeaguesBySportsResult.League &amp;&amp; _.isArray(result.GetAvailLeaguesBySportsResult.League)) {
+                loadedData = result.GetAvailLeaguesBySportsResult.League;
+              }
+            }
+
+            if (_.isArray(loadedData)) {
+              that.log(&#x27;Received &#x27; + loadedData.length + &#x27; league objects&#x27;);
+              loadedData.forEach(function forEach(item) {
+
+                if (item.leagueID) {
+                  var itemId = item.leagueID;
+
+                  var league = that.data.itemWithId(itemId);
+                  if (_.isNull(league)) {
+                    league = new LeagueEntity({
+                      option1: &#x27;optionOne&#x27;
+                    });
+                  }
+
+                  Object.import(league,item, {leagueID: &#x27;id&#x27;, leagueName: &#x27;name&#x27;, leagueShortcut: &#x27;shortName&#x27;, leagueSaison: &#x27;term&#x27;});
+                  that.data.addItem(league);
+                }
+              });
+
+              that.markAsFresh();
+
+              if (callback) {
+                callback(err, that.data.items());
+              }
+            }
+
+          };
 
 
+          if (that.sportId) {
+            connection.GetAvailLeaguesBySports({sportID: parseInt(that.sportId)}, handleRefreshResponse);
+          } else {
+            connection.GetAvailLeagues(handleRefreshResponse);
+          }
+
+        } else {
+          if (callback) {
+            process.nextTick(callback(new Error(&#x27;No connection&#x27;, 1), null));
+          }
+        }
+
+      });
+
+      return true;
+    } else {
+      this.log(&#x27;Using cached leagues data.&#x27;);
+
+      if (callback) {
+        var cThat = this;
+        process.nextTick(function () {
+          callback(null.data.items());
+        });
+      }
+
+      return false;
+    }
+  };
 
 
 };

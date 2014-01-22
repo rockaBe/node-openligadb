@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Manager - node-openligadb</title>
+    <title>lib/League.js - node-openligadb</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,68 +104,73 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Manager Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: lib/League.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * @module node-openligadb
+ * @submodule Entities
+ * @main node-openligadb
+ * @author Daniel Wetzel &lt;daniel@keksbox.com&gt;
+ */
+&#x27;use strict&#x27;;
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/lib_List.js.html#l12"><code>lib&#x2F;List.js:12</code></a>
-        </div>
-    
+var _ = require(&#x27;underscore&#x27;);
+var util = require(&#x27;util&#x27;);
 
-    
-</div>
+var EntityPrototype = require(&#x27;./Prototype&#x27;);
 
+/**
+ * A league entity represents a sport league.
+ *
+ * @class League
+ * @param options
+ * @constructor
+ */
+var League = function (options) {
 
+  League.super_.apply(this, arguments);
 
-<div class="box intro">
-    <p>The prototype of all manager objects.</p>
+  this.readOptions(options);
 
-</div>
+  /**
+   * The id of the league.
+   *
+   * @property id
+   * @type {String|null}
+   */
+  this.id = null;
 
+  /**
+   * The full name of the league.
+   *
+   * @property name
+   * @type {String|null}
+   */
+  this.name = null;
 
+  /**
+   * The shortname of the league.
+   *
+   * @property shortName
+   * @type {String|null}
+   */
+  this.shortName = null;
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
+  /**
+   * The term of the league. Each term has its own instance of the same real-world league.
+   *
+   * @property term
+   * @type {String|null}
+   */
+  this.term = null;
 
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="../classes/Leagues.html">
-                        Leagues
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/List.html">
-                        List
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/ManagerPrototype.html">
-                        ManagerPrototype
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/Sports.html">
-                        Sports
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
+};
 
-    <div class="yui3-u-1-2">
-        
-    </div>
+util.inherits(League, EntityPrototype);
+module.exports = League;
+    </pre>
 </div>
 
                     </div>

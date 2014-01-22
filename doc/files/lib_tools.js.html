@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/League.html">League</a></li>
+            
                 <li><a href="../classes/Leagues.html">Leagues</a></li>
             
                 <li><a href="../classes/List.html">List</a></li>
@@ -114,8 +116,9 @@
  */
 
 /* jshint freeze:false */
-
 &#x27;use strict&#x27;;
+
+var _ = require(&#x27;underscore&#x27;);
 
 var fs = require(&#x27;fs&#x27;);
 var path = require(&#x27;path&#x27;);
@@ -183,6 +186,21 @@ Object.defineProperty(Object.prototype, &#x27;spawn&#x27;, {value: function (pro
   }
   return Object.create(this, defs);
 }});
+
+Object.import = function(target, template, map) {
+
+  Object.keys(template).forEach(function (name) {
+
+    var usedName = name;
+    if (map &amp;&amp; map[name]) {
+      usedName = map[name];
+    }
+
+    target[usedName] = template[name];
+
+  });
+
+};
     </pre>
 </div>
 

@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/EntityPrototype.html">EntityPrototype</a></li>
             
+                <li><a href="../classes/League.html">League</a></li>
+            
                 <li><a href="../classes/Leagues.html">Leagues</a></li>
             
                 <li><a href="../classes/List.html">List</a></li>
@@ -364,7 +366,7 @@
 
     <div class="description">
         <p>Adds an item to the list.</p>
-<p>Before adding the item, the method checks if the item has a function id() of type &quot;String&quot;. If, after calling this
+<p>Before adding the item, the method checks if the item has a property id. If, after calling this
 method, the item is part of this list, it return true, otherwise false.</p>
 <p>The list is id-unique. You cannot add multiple items with the same id.</p>
 
@@ -542,7 +544,7 @@ method, the item is part of this list, it return true, otherwise false.</p>
 
     <div class="description">
         <p>Returns the item with the given id.</p>
-<p>This works by comparing the result of the id() function of all items with the parameter. Therefore, this only works
+<p>This works by comparing the result of the id property of all items with the parameter. Therefore, this only works
 with objects with a function named id returning a &quot;String&quot;.</p>
 
     </div>
